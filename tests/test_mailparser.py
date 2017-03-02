@@ -43,9 +43,9 @@ if __name__ == "__main__":
         print("Body Text part: \n",text_part)
         print("Body HTML part: \n",html_part)
         print("Attached files: ", messageObj.filenames)
-        print("Get payload[0]: ", "\n====================\n",messageFull.get_payload()[0], "\n===========================")
-        print("Get payload[1]: ", "\n====================\n",messageFull.get_payload()[1], "\n===========================")
-        # [print("Attached FILENAME: ", k, "\nFile Content: \n", messageObj.attachments[k]) for k in messageObj.attachments.keys()]
+        # print("Get payload[0]: ", "\n====================\n",messageFull.get_payload()[0], "\n===========================")
+        # print("Get payload[1]: ", "\n====================\n",messageFull.get_payload()[1], "\n===========================")
+        [print("Attached FILENAME: ", k, "\nFile Content: \n", messageObj.attachments[k]) for k in messageObj.attachments.keys()]
 
 
     # msg = email.message_from_bytes(r)
