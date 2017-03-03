@@ -24,6 +24,7 @@ if __name__ == "__main__":
         decoded_subject = messageObj.get_header()
         email_date = messageObj.datetime()
         messageObj.set_body_message()
+        all_ip_in_received = [match_ip[0] for match_ip in utils.find_valid_ip(" ".join(messageObj.get_header("Received")))]
         html_part = messageObj.body_html
         text_part = messageObj.body_text
         print("\n==========BEGINNING=============")
@@ -41,7 +42,7 @@ if __name__ == "__main__":
         print("Names from: ", decoded_from_name_adress[0])
         print("Adresses from: ", decoded_from_name_adress[1])
         print("All Received headers", messageObj.get_header("Received"))
-        print("Original Received IP: ", utils.find_valid_ip(messageObj.get_header("Received")[-1]))
+        print("All Received IP: ", all_ip_in_received)
         print("X-Originating-IP (if exists): ", utils.find_valid_ip(" ".join(messageObj.get_header("X-Originating-IP"))))
         print("Subject: ", " ".join(decoded_subject))
         print("Body Text part: \n",text_part)
