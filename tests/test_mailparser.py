@@ -6,6 +6,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from mailreader.mailparser import *
+import mailreader.utils as utils
 import email_credentials as EC
 
 if __name__ == "__main__":
@@ -20,12 +21,12 @@ if __name__ == "__main__":
         messageFull = messageObj.msg
         decoded_to_name_adress = messageObj.name_adress()
         decoded_from_name_adress = messageObj.name_adress("From")
-        decoded_subject = messageObj.get_subject()
+        decoded_subject = messageObj.get_header()
         email_date = messageObj.datetime()
         messageObj.set_body_message()
         html_part = messageObj.body_html
         text_part = messageObj.body_text
-        print("\n=======================")
+        print("\n==========BEGINNING=============")
         print("Content type: ", messageFull["Content-Type"])
         print("Full message:",messageFull, "\n++++++++++++++++++++")
         print("CLASS: ",messageFull.__class__)
@@ -39,13 +40,17 @@ if __name__ == "__main__":
         print("Adresses To: ", decoded_to_name_adress[1])
         print("Names from: ", decoded_from_name_adress[0])
         print("Adresses from: ", decoded_from_name_adress[1])
-        print("Subject: ", decoded_subject)
+        print("All Received headers", messageObj.get_header("Received"))
+        print("Original Received IP: ", utils.find_valid_ip(messageObj.get_header("Received")[-1]))
+        print("X-Originating-IP (if exists): ", utils.find_valid_ip(" ".join(messageObj.get_header("X-Originating-IP"))))
+        print("Subject: ", " ".join(decoded_subject))
         print("Body Text part: \n",text_part)
         print("Body HTML part: \n",html_part)
         print("Attached files: ", messageObj.filenames)
         # print("Get payload[0]: ", "\n====================\n",messageFull.get_payload()[0], "\n===========================")
         # print("Get payload[1]: ", "\n====================\n",messageFull.get_payload()[1], "\n===========================")
         [print("Attached FILENAME: ", k, "\nFile Content: \n", messageObj.attachments[k]) for k in messageObj.attachments.keys()]
+        print("============END================")
 
 
     # msg = email.message_from_bytes(r)
