@@ -21,7 +21,7 @@ def fetch_all(connected_mail):
         # print(connected_mail.fetch(email_uid, "(BODY[HEADER.FIELDS (FROM)])"))
         # print(email_data[0][1])
         print("\nEmail UID: ", email_uid)
-        yield email_data[0][1]
+        yield (email_data[0][1], email_uid)
 
 
 class EmailComponents:
@@ -29,9 +29,8 @@ class EmailComponents:
     Class for fetching all particular components from every email message.
     """
     def __init__(self, mailObject):
-        self.mailObject = mailObject
+        self.mailObject, self.UID = mailObject
 
-        self.UID = None
         # self.from_adress = None
         # self.from_name = None
         # self.to_adress = []
