@@ -69,13 +69,13 @@ class EmailComponents:
                 adress.append(name_adress[1])
         return (name, adress)
 
-    def get_subject(self, subject="Subject"):
+    def get_header(self, subject="Subject"):
         """
-        Return decoded email subject.
+        Return list containing parts of decoded particular email header. 
         :param subject: field name of mail object. Default is 'Subject'
         """
-        subject_value = self.msg.get_all(subject, [])
-        decoded_value = self.get_decoded_value(subject_value[0])
+        header_value = self.msg.get_all(subject, [])
+        decoded_value = [self.get_decoded_value(header_chunk) for header_chunk in header_value]
         return decoded_value
 
 
