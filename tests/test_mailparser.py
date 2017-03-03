@@ -28,13 +28,14 @@ if __name__ == "__main__":
         html_part = messageObj.body_html
         text_part = messageObj.body_text
         print("\n==========BEGINNING=============")
+        print("UID: ", messageObj.UID)
         print("Content type: ", messageFull["Content-Type"])
-        print("Full message:",messageFull, "\n++++++++++++++++++++")
+        print("Full message:\n++++++++++++++++++++++++++++\n",messageFull, "\n++++++++++++++++++++")
         print("CLASS: ",messageFull.__class__)
-        try:
-            print("Get body: =====================>\n", messageFull.get_body(preferencelist=('related', 'html', 'plain')), "\n---------------------")
-        except AttributeError as e:
-            print(e)
+        # try:
+        #     print("Get body: =====================>\n", messageFull.get_body(preferencelist=('related', 'html', 'plain')), "\n---------------------")
+        # except AttributeError as e:
+        #     print(e)
         print("maintype: ", messageObj.msg.get_content_type())
         print("Date: ", email_date)
         print("Names To: ", decoded_to_name_adress[0])
