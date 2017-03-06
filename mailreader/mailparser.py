@@ -140,7 +140,7 @@ class EmailComponents:
             self.filenames.append(message.get_filename())
             self.attachments.update({message.get_filename() : message.get_payload()})
         elif message.get_content_type() == "text/plain":
-            self.body_text += message.get_payload(None, True).decode('utf-8') + "\n"
+            self.body_text += message.get_payload(None, True).decode(message.get_content_charset()) + "\n"
         elif message.get_content_type() == "text/html":
-            self.body_html += message.get_payload(None, True).decode('utf-8')
+            self.body_html += message.get_payload(None, True).decode(message.get_content_charset())
 
