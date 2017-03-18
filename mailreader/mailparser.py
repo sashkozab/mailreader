@@ -54,6 +54,15 @@ class EmailComponents:
         # self.msg = email.message_from_bytes(self.mailObject)
         self.msg = BytesParser(policy=policy.default).parsebytes(self.mailObject)
 
+
+    def init_msg_from_file(self):
+        """
+        Just initialize message from mailObject using message_from_file method 
+        of email mudule. Otherwise by default self.msg == None
+        """
+        self.msg = email.message_from_file(self.mailObject)
+
+
     def name_adress(self, to="To"):
         """
         List of tuples that containe recipient's ('To') or sender's ('From') pair of (Name, Adress) each.
